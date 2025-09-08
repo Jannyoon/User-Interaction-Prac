@@ -23,27 +23,12 @@
       cardRow[addRow].push(cardRow[addRow][0])
     }
 
-
-    // onMount(()=>{
-    //   const first = document.querySelectorAll('.container')[activeIdx[0]].querySelectorAll<HTMLElement>('.focusable')[0]
-    //   first.focus()
-    // })
-
+    
     $effect(()=>{
       console.log("activeVal", activeVal)
     })
 
     $effect(()=>{
-      // const handleFocusTab = (e:FocusEvent)=>{
-      //   const active = document.activeElement
-      //   // console.log("현재 활성화 된 곳", active)
-        
-      //   const focusedInputElement = active?.querySelector('input')
-      //   // console.log("input 출력", focusedInputElement)
-      //   focusedInputElement?.select()
-  
-      // }
-
       const addThroughTab = (e:KeyboardEvent) => {
         //이전 state 참조
         const rowIdx = activeIdx[0]
@@ -63,20 +48,12 @@
           } else if (colIdx>0){
             const prev = document.querySelectorAll('.container')[rowIdx].querySelectorAll<HTMLElement>('.focusable')[colIdx-1]
             prev?.focus()}
-          // } else {
-          //   console.log("activeIdx", activeIdx)
-          //   const prev = document.querySelectorAll('.container')[rowIdx].querySelector('.container')
-          //   console.log(prev)
-          // }
         }
         else if (e.key==='Tab' && colIdx===lastIdx && !e.shiftKey) cardRow[rowIdx].push(cardRow[rowIdx][0])
       }      
       document.addEventListener('keydown', addThroughTab)
-      // document.addEventListener('focusin', handleFocusTab)
-
       return ()=>{
         document.removeEventListener('keydown', addThroughTab)
-        // document.removeEventListener('focusin', handleFocusTab)
       }      
     })
 
@@ -87,7 +64,6 @@
     <div class="container">
       <div class="dateTime">
         <div class="date" tabindex="0" autofocus={rowIdx===0} 
-        
           onfocus={()=>{
             activeVal=""
             activeIdx = [rowIdx, -2]
